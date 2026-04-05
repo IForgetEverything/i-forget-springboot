@@ -1,0 +1,33 @@
+spring:
+  profiles:
+    active: local
+  application:
+    name: boilerplate
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/restaurant_db
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:password}
+    driver-class-name: org.postgresql.Driver
+
+  jpa: # Aligned with datasource, not inside it
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  # Flyway Migration Settings
+  # If you make a mistake in V1: Do not edit V1. Instead, create V2 to "fix" the mistake.
+  flyway:
+    enabled: true
+    user: ${FLYWAY_USER:postgres}
+    password: ${FLYWAY_PASSWORD:password}
+    schemas: public # Use 'public' unless you manually created 'schemaName' in Postgres
+    locations: classpath:db/migration
+    baseline-on-migrate: true #Good for existing database
+
+server:
+  port: 8080
