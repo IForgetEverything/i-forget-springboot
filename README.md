@@ -1,2 +1,2 @@
 # i-forget-springboot
-Backend for my game
+Boilerplate example of flyway with springboot & unit test
